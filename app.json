@@ -1,4 +1,10 @@
 {
   "name": "aTommy",
-  "displayName": "aTommy"
+  "displayName": "aTommy",
+  "expo": {
+    "slug": "aTommy",
+    "name": "aTommy",
+    "sdkVersion": "39.0.0",
+    "entryPoint": ".vscode\\exponentIndex.js"
+  }
 }

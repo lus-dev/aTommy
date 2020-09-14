@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
-  View,
-  Text,
-  TextInput,
+  Button, Text,
+  TextInput, View
 } from 'react-native';
 
 
-const aTommy = () => {
-  return (
-    <View
-      style={{
-        margin: 10
-        }}>
+export default class aTommy extends Component {
+
+  state = {
+    url: "",
+    video: "Response"
+  };
+
+  changeVideoUrl = (view) => {
+    const text = view.nativeEvent.text;
+    console.log(text);
+    this.setState(state => {
+      this.fetchVideo(text);
+    });
+  };
+
+  render() {
+    return (<View
+      style={{ margin: 10 }}>
+
       <Text>Video URL:</Text>
       <TextInput
         style={{
@@ -19,10 +31,20 @@ const aTommy = () => {
           borderColor: 'gray',
           borderWidth: 1
         }}
-        defaultValue="Type..."
-      />
+        onSubmitEditing = {value => this.changeVideoUrl(value)} />
+      <Text>{JSON.stringify(this.state.video)}</Text>
     </View>
-  );
-}
+   );
+  }
 
-export default aTommy;
+  fetchVideo = (url) => {
+    return (fetch(url)
+    .then(response => response.json())
+    .then(json => { 
+      console.log(json);
+      this.setState({ url: url, video: json });
+    })
+    .catch(error => { console.log(error) }));
+  };
+
+}
